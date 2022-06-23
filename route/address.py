@@ -30,8 +30,6 @@ async def delete_address_data(id, address: Address):
     return addressEntity(conn.local.address.find_one_and_delete({"_id": ObjectId(id)}))
 
 
-
-
 @address.get("/totalrange")
 async def get_range(latitude1, longitude1, distance):
 
