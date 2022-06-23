@@ -1,8 +1,8 @@
 from fastapi import APIRouter
 
 from model.address import Address
-from config.database import conn
-from schema.address import addressEntity, listaddressEntity
+from config.db import conn
+from schema.address import addressEntity, listofaddressEntity
 from bson import ObjectId
 from Distance import getDistance
 
@@ -11,8 +11,8 @@ address = APIRouter()
 @address.get("/address")
 async def find_all():
     print(conn.local.user.find())
-    print(listaddressEntity(conn.local.address.find()))
-    return listaddressEntity(conn.local.address.find())
+    print(listofaddressEntity(conn.local.address.find()))
+    return listofaddressEntity(conn.local.address.find())
 
 @address.post("/address")
 async def add_new_data(address: Address):
@@ -23,7 +23,7 @@ async def add_new_data(address: Address):
     if address.longitude < -180 or address.longitude > 180:
         return {"error": "Longitude must be between -180 and 180"}
     conn.local.address.insert_one(dict(address))
-    return listaddressEntity(conn.local.address.find())
+    return listofaddressEntity(conn.local.address.find())
 
 @address.delete("/{id}")
 async def delete_address_data(id, address: Address):
