@@ -29,17 +29,6 @@ async def add_new_data(address: Address):
 async def delete_address_data(id, address: Address):
     return addressEntity(conn.local.address.find_one_and_delete({"_id": ObjectId(id)}))
 
-@address.put("/{id}")
-async def update_address_data(id, address: Address):
-    if address.latitude is None or address.longitude is None:
-        return {"error": "Latitude and Longitude are required"}
-    if address.latitude < -90 or address.latitude > 90:
-        return {"error": "Latitude must be between -90 and 90"}
-    if address.longitude < -180 or address.longitude > 180:
-        return {"error": "Longitude must be between -180 and 180"}
-    conn.local.address.find_one_and_update({"_id": ObjectId(id)},{'$set': dict(address)})
-    return addressEntity(conn.local.address.find_one({"_id": ObjectId(id)}))
-
 
 
 
