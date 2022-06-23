@@ -6,3 +6,4 @@ class Address(BaseModel):
     zip: int  
     latitude: float
     longitude: float
+    

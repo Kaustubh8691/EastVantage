@@ -29,6 +29,7 @@ async def delete_address_data(id, address: Address):
 
 @address.put("/{id}")
 async def update_address_data(id, address: Address):
+    
     if address.latitude is None or address.longitude is None:
         return {"error": "Latitude and Longitude are must required"}
     if address.latitude < -90 or address.latitude > 90 or address.longitude < -180 or address.longitude > 180:

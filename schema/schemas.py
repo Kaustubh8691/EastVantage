@@ -5,7 +5,8 @@ def addressEntity(item) -> dict:
         "city": item["city"],
         "state": item["state"],
          "zip": item["zip"],
-        
+         "longitude": item["longitude"],
+        "latitude": item["latitude"]
     }
 
 
